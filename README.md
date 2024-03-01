@@ -1,1 +1,1 @@
-![Image Alt text](/U/Rplot.jpg
+![Image Alt text](/Imágenes/Rplot.png)
