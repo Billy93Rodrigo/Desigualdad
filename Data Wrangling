@@ -1,0 +1,86 @@
+library(readxl) 
+library(dplyr) 
+
+
+base=(readxl::read_xlsx("U:/ECE 2022 (Desigualdad)/GINI.xlsx"))
+Hom=base%>%select(`Ingreso por persona neto`,H)%>%filter(H!="-")
+Hom$H=as.numeric(Hom$H)
+Muj=base%>%select(`Ingreso por persona neto`,M)%>%filter(M!="-")
+Muj$M=as.numeric(Muj$M)
+Tot=base%>%select(`Ingreso por persona neto`,"Total")%>%filter(Total!="-")
+
+
+inct=rbind(sum(Tot[1:1551,1])/1551,
+           sum(Tot[1552:3103,1])/1552,
+           sum(Tot[3104:4654,1])/1551,
+           sum(Tot[4655:6206,1])/1552,
+           sum(Tot[6207:7757,1])/1551)
+
+pobt=rbind(sum(Tot[1:1551,2]),
+           sum(Tot[1552:3103,2]),
+           sum(Tot[3104:4654,2]),
+           sum(Tot[4655:6206,2]),
+           sum(Tot[6207:7757,2]))
+
+perinct=rbind(sum(Tot[1:1551,1]),
+              sum(Tot[1552:3103,1]),
+              sum(Tot[3104:4654,1]),
+              sum(Tot[4655:6206,1]),
+              sum(Tot[6207:7757,1]))/sum(Tot[1:7757,1])*100
+
+perpobt=rbind(sum(Tot[1:1551,2]),
+              sum(Tot[1552:3103,2]),
+              sum(Tot[3104:4654,2]),
+              sum(Tot[4655:6206,2]),
+              sum(Tot[6207:7757,2]))/sum(Tot[1:7757,2])*100
+
+feminc=rbind(sum(Muj[1:1446,1])/1446,
+             sum(Muj[1447:2893,1])/1447,
+             sum(Muj[2894:4339,1])/1446,
+             sum(Muj[4340:5786,1])/1447,
+             sum(Muj[5787:7232,1])/1446)
+
+pobfem=rbind(sum(Muj[1:1446,2]),
+             sum(Muj[1447:2893,2]),
+             sum(Muj[2894:4339,2]),
+             sum(Muj[4340:5786,2]),
+             sum(Muj[5787:7232,2]))
+
+perincfem=rbind(sum(Muj[1:1446,1]),
+                sum(Muj[1447:2893,1]),
+                sum(Muj[3013:4531,1]),
+                sum(Muj[4340:5786,1]),
+                sum(Muj[5787:7232,1]))/sum(Muj[1:7232,1])*100
+
+perpobfem=rbind(sum(Muj[1:1446,2]),
+                sum(Muj[1447:2893,2]),
+                sum(Muj[3013:4531,2]),
+                sum(Muj[4340:5786,2]),
+                sum(Muj[5787:7232,2]))/sum(Muj[1:7232,2])*100
+
+
+maleinc=rbind(sum(Hom[1:1398,1])/1398,
+              sum(Hom[1399:2796,1])/1398,
+              sum(Hom[2797:4194,1])/1398,
+              sum(Hom[4195:5592,1])/1398,
+              sum(Hom[5593:6989,1])/1397)
+
+
+pobmale=rbind(sum(Hom[1:1398,2]),
+              sum(Hom[1399:2796,2]),
+              sum(Hom[2797:4194,2]),
+              sum(Hom[4195:5592,2]),
+              sum(Hom[5593:6989,2]))
+
+
+perincmale=rbind(sum(Hom[1:1398,1]),
+                 sum(Hom[1399:2796,1]),
+                 sum(Hom[2797:4194,1]),
+                 sum(Hom[4195:5592,1]),
+                 sum(Hom[5593:6989,1]))/sum(Hom[1:6989,1])*100
+
+perpobmale=rbind(sum(Hom[1:1398,2]),
+                 sum(Hom[1399:2796,2]),
+                 sum(Hom[2797:4194,2]),
+                 sum(Hom[4195:5592,2]),
+                 sum(Hom[5593:6989,2]))/sum(Hom[1:6989,2])*100
